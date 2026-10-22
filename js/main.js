@@ -30,6 +30,15 @@ class App {
     } else {
       this.showStartScreen();
     }
+
+    const src = new URLSearchParams(location.search).get('src');
+    if (src) {
+      // Drop the parameter so a reload does not fetch (and overwrite) again.
+      const url = new URL(location.href);
+      url.searchParams.delete('src');
+      history.replaceState(null, '', url);
+      this.openFromUrl(src);
+    }
   }
 
   // ---------- start screen ----------
@@ -73,6 +82,39 @@ class App {
       appState.loadSite(await res.json());
     } catch (err) {
       this.showStartScreen(`Impossible d’ouvrir l’exemple : ${err.message}`);
+    }
+  }
+
+  /** Route C: open a site package from an https URL (the host must allow CORS; Google Drive does not). */
+  async openFromUrl(src) {
+    let parsed;
+    try {
+      parsed = new URL(src);
+    } catch {
+      return this.reportLoadError('Adresse invalide.');
+    }
+    if (parsed.protocol !== 'https:') return this.reportLoadError('Seules les adresses https:// sont acceptées.');
+
+    if (appState.hasSite && !confirm(
+      `Remplacer le site « ${appState.site.name} » par le fichier de ${parsed.host} ?\nExportez d’abord le site actuel si vous voulez le garder.`)) {
+      return;
+    }
+
+    let text;
+    try {
+      const res = await fetch(parsed, { credentials: 'omit', referrerPolicy: 'no-referrer' });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      text = await res.text();
+    } catch (err) {
+      const reason = err instanceof TypeError
+        ? 'Le serveur n’autorise pas le chargement direct (CORS) ou est injoignable. Téléchargez le fichier, puis utilisez « Ouvrir un fichier ».'
+        : err.message;
+      return this.reportLoadError(`Chargement impossible : ${reason}`);
+    }
+    try {
+      appState.loadSite(JSON.parse(text));
+    } catch (err) {
+      this.reportLoadError(err instanceof SyntaxError ? 'Le fichier n’est pas un JSON valide.' : err.message);
     }
   }
 

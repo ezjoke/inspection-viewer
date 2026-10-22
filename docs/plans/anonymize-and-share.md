@@ -171,7 +171,7 @@ A static page cannot fetch a Drive "anyone with the link" file directly, because
 - Share with named people, not "anyone with the link"; the package contains the full report and the plan.
 - Use *include progress and notes* only when you want the recipient to see your notes.
 
-**Status.** `[~]` Route A (manual Drive sharing) documented in the README. Routes B and C not built.
+**Status.** `[x]` Route A documented in the README. Route C built: `?src=<https URL>` in `js/main.js` (https only, same validation as a local file, confirmation before replacing an open site, parameter removed from the address bar, CORS failure explained), 4 Playwright tests. Route B (Drive API) deliberately not built: decide after route A has been used.
 
 ---
 
@@ -188,5 +188,5 @@ A static page cannot fetch a Drive "anyone with the link" file directly, because
 ## Open questions
 
 1. ~~Keep `file://` support or switch to ES modules?~~ Decided: ES modules (needs Pages or `tools/serve.py`).
-2. Is Google Drive route A enough, or is the Drive API (route B) wanted?
+2. Is Google Drive route A enough, or is the Drive API (route B) wanted? Left open until route A has been used.
 3. Language: keep the UI French only, or add an English string table later?

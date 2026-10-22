@@ -57,7 +57,7 @@ The old public repo was deleted and recreated empty (Phase 0 done). In the local
 2. **Optional follow-ups:**
    - A GitHub Action that runs the generic part of `check_no_pii.sh` and `npm test` (the denylist is not available in CI, so the personal-pattern check stays local).
    - Escape the personal note in `openDetailDrawer` (`views.js`) so `</textarea>` in a note cannot break the drawer.
-   - Sharing routes B (Google Drive API) and C (`?src=` URL).
+   - Sharing route B (Google Drive API), only if manual sharing proves too clumsy. Route C (`?src=` URL) is done.
    - Per-site configuration screens (levels, footprints, status scale, item editor, plan image upload) — the follow-up project that motivated all this.
 
 ## Known issues and decisions to keep in mind

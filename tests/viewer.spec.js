@@ -192,3 +192,55 @@ test('the shipped files contain no embedded real-site data', async () => {
   expect(DEMO.site.name).toMatch(/fictive/i);
   expect(text.length).toBeLessThan(50_000);
 });
+
+test.describe('?src= URL loading (sharing route C)', () => {
+  const SRC = 'https://files.example.test/site.inspection.json';
+
+  test('opens a package from an https URL that allows CORS, then drops the parameter', async ({ page }) => {
+    const errors = watchErrors(page);
+    await page.route(SRC, (route) => route.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      headers: { 'access-control-allow-origin': '*' },
+      body: JSON.stringify(DEMO),
+    }));
+    await page.goto(`/index.html?src=${encodeURIComponent(SRC)}`);
+    await expect(page.locator('.app-nav')).toBeVisible();
+    await expect(page.locator('#site-title')).toHaveText(DEMO.site.name);
+    expect(new URL(page.url()).search).toBe('');
+    expect(errors).toEqual([]);
+  });
+
+  test('refuses a non-https URL without fetching it', async ({ page }) => {
+    let fetched = false;
+    await page.route('http://files.example.test/**', (route) => { fetched = true; route.abort(); });
+    await page.goto(`/index.html?src=${encodeURIComponent('http://files.example.test/site.json')}`);
+    await expect(page.locator('.error-text')).toContainText('https');
+    await expect(page.locator('.app-nav')).toBeHidden();
+    expect(fetched).toBe(false);
+  });
+
+  test('explains CORS failures and keeps the start screen', async ({ page }) => {
+    // A CORS block surfaces to fetch() as the same network TypeError as an aborted request.
+    await page.route(SRC, (route) => route.abort('failed'));
+    await page.goto(`/index.html?src=${encodeURIComponent(SRC)}`);
+    await expect(page.locator('.error-text')).toContainText('CORS');
+    await expect(page.locator('.app-nav')).toBeHidden();
+  });
+
+  test('a malformed remote package is refused and the current site is kept', async ({ page }) => {
+    await openDemo(page);
+    await page.route(SRC, (route) => route.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      headers: { 'access-control-allow-origin': '*' },
+      body: '{"schema": 1}',
+    }));
+    const dialogs = [];
+    page.on('dialog', async (d) => { dialogs.push(d.message()); await d.accept(); });
+    await page.goto(`/index.html?src=${encodeURIComponent(SRC)}`);
+    await expect.poll(() => dialogs.length).toBe(2); // confirm replace, then "Fichier refusé"
+    expect(dialogs[1]).toContain('Fichier refusé');
+    await expect(page.locator('#site-title')).toHaveText(DEMO.site.name);
+  });
+});

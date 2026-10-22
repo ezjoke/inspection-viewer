@@ -25,6 +25,18 @@ Visualiseur interactif d'un rapport d'inspection de bâtiment. Il fonctionne ent
 2. Déposez-le dans un dossier Google Drive partagé **avec des personnes précises** (évitez « tous ceux qui ont le lien » : le fichier contient tout le rapport).
 3. La personne télécharge le fichier et l'ouvre avec **Ouvrir un fichier de site**.
 
+Google Drive n'autorise pas le chargement direct depuis une page web (pas d'en-têtes CORS) : le téléchargement manuel est donc la méthode à utiliser avec Drive.
+
+### Ouvrir par adresse (`?src=`)
+
+Si le fichier est hébergé ailleurs qu'à Drive, sur un serveur qui autorise le CORS (par exemple un Gist ou un fichier brut sur GitHub), on peut l'ouvrir directement par un lien :
+
+```
+https://<utilisateur>.github.io/<dépôt>/?src=https%3A%2F%2Fexemple.org%2Fsite.inspection.json
+```
+
+Seules les adresses `https://` sont acceptées, le fichier passe par la même validation qu'un fichier local, et un site déjà ouvert n'est remplacé qu'après confirmation. Un lien `?src=` fait charger le fichier d'un tiers : n'ouvrez que des liens de personnes de confiance.
+
 ## Format du fichier de site
 
 Voir `js/package.js` (validation) et `demo/demo-site.inspection.json` (exemple). Les fichiers refusés ne modifient jamais le site en cours.
