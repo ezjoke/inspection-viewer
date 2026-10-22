@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visualiseur d’inspection</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Top Header -->
+    <header class="app-header">
+      <div class="header-top-row">
+        <div class="app-branding">
+          <span class="app-logo">🏡</span>
+          <div>
+            <h1 class="app-title" id="site-title">Visualiseur d’inspection</h1>
+            <p class="app-subtitle hidden" id="site-subtitle">Visualiseur de rapport d’inspection</p>
+          </div>
+        </div>
+
+        <div class="header-meta-group">
+          <div class="progress-summary-box hidden" id="header-progress-box">
+            <span class="progress-summary-text" id="header-progress-text">—</span>
+            <div class="progress-bar-track">
+              <div class="progress-bar-fill" id="header-progress-fill"></div>
+            </div>
+          </div>
+
+          <button type="button" class="btn btn-sm btn-outline hidden" id="btn-open-backup" title="Exporter, partager ou changer de site">
+            💾 Site & partage
+          </button>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <nav class="app-nav hidden">
+        <a href="#dashboard" class="nav-link active" data-view="dashboard">
+          <span class="nav-icon">📊</span> Tableau de bord
+        </a>
+        <a href="#zones" class="nav-link" data-view="zones">
+          <span class="nav-icon">📁</span> Par Zone
+        </a>
+        <a href="#trades" class="nav-link" data-view="trades">
+          <span class="nav-icon">👷</span> Par Métier
+        </a>
+        <a href="#site_plan" class="nav-link" data-view="site_plan">
+          <span class="nav-icon">🗺️</span> Plan du site
+        </a>
+        <a href="#floor_plan" class="nav-link" data-view="floor_plan">
+          <span class="nav-icon">📐</span> Plan d'étage
+        </a>
+        <a href="#admin" class="nav-link" data-view="admin">
+          <span class="nav-icon">ℹ️</span> Infos & Légende
+        </a>
+      </nav>
+    </header>
+
+    <!-- Main View Content Area -->
+    <main class="main-view-container" id="main-view-content">
+      <div class="empty-state">
+        <p>Chargement…</p>
+      </div>
+    </main>
+
+    <!-- Slide-in Detail Drawer -->
+    <div class="overlay" id="drawer-overlay"></div>
+    <aside class="drawer" id="detail-drawer" aria-label="Détails de l'observation"></aside>
+
+    <!-- Modals -->
+    <div class="overlay" id="modal-overlay"></div>
+    <div class="modal" id="assign-modal" aria-label="Assigner des éléments"></div>
+    <div class="modal" id="backup-modal" aria-label="Sauvegarde et restauration"></div>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

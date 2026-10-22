@@ -1,0 +1,24 @@
+# Real site data never goes in this repository.
+private/
+
+# Source documents and exports
+*.xlsx
+*.numbers
+*.pdf
+*.zip
+*.local.*
+
+# Only the fictional demo may ship a site package
+*.inspection.json
+!demo/demo-site.inspection.json
+
+# macOS
+.DS_Store
+
+# Playwright
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/

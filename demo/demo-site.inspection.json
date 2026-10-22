@@ -1,0 +1,457 @@
+{
+  "schema": 1,
+  "site": {
+    "name": "Maison exemple (fictive)"
+  },
+  "items": [
+    {
+      "id": "toiture__bardeaux",
+      "zone": "Toiture",
+      "article": "Revêtement en bardeaux",
+      "colorKey": "orange",
+      "status": "À corriger — préventif",
+      "urgency": "1 à 3 ans",
+      "trade": "Couvreur",
+      "costEstimate": "800 $ – 2 000 $",
+      "rawObservation": "• Bardeaux usés près du faîte\n  • Remplacer les bardeaux soulevés",
+      "page": 5,
+      "isExterior": true
+    },
+    {
+      "id": "toiture__gouttieres",
+      "zone": "Toiture",
+      "article": "Gouttières",
+      "colorKey": "rouge",
+      "status": "À corriger — prioritaire",
+      "urgency": "Immédiat",
+      "trade": "Couvreur",
+      "costEstimate": "300 $ – 700 $",
+      "rawObservation": "• Gouttière affaissée côté nord\n  • Risque d’infiltration à la fondation",
+      "page": 6,
+      "isExterior": true
+    },
+    {
+      "id": "exterieur__terrasse",
+      "zone": "Extérieur",
+      "article": "Terrasse",
+      "colorKey": "orange",
+      "status": "À corriger — préventif",
+      "urgency": "1 à 3 ans",
+      "trade": "Menuisier",
+      "costEstimate": "500 $ – 1 500 $",
+      "rawObservation": "• Planches fendillées\n• Garde-corps à resserrer",
+      "page": 7,
+      "isExterior": true
+    },
+    {
+      "id": "exterieur__entree",
+      "zone": "Extérieur",
+      "article": "Entrée de stationnement",
+      "colorKey": "vert",
+      "status": "Conforme",
+      "urgency": "—",
+      "trade": "—",
+      "costEstimate": "—",
+      "rawObservation": "• Gravier en bon état",
+      "page": 7,
+      "isExterior": true
+    },
+    {
+      "id": "exterieur__cabanon",
+      "zone": "Extérieur",
+      "article": "Cabanon",
+      "colorKey": "vert",
+      "status": "Conforme",
+      "urgency": "—",
+      "trade": "—",
+      "costEstimate": "—",
+      "rawObservation": "• Aucune déficience observable",
+      "page": 8,
+      "isExterior": true
+    },
+    {
+      "id": "fondation__murs",
+      "zone": "Sous-sol",
+      "article": "Murs de fondation",
+      "colorKey": "orange",
+      "status": "À corriger — préventif",
+      "urgency": "1 à 3 ans",
+      "trade": "Expert en fondations",
+      "costEstimate": "1 000 $ – 3 000 $",
+      "rawObservation": "• Fissure verticale fine, à surveiller",
+      "page": 10,
+      "isExterior": false
+    },
+    {
+      "id": "fondation__drain",
+      "zone": "Sous-sol",
+      "article": "Drain de plancher",
+      "colorKey": "bleu",
+      "status": "Requis — non inspecté",
+      "urgency": "À vérifier",
+      "trade": "Plombier",
+      "costEstimate": "200 $ – 500 $",
+      "rawObservation": "• Accès obstrué lors de la visite\n  • Faire inspecter par caméra",
+      "page": 11,
+      "isExterior": false
+    },
+    {
+      "id": "plomberie__chauffe-eau",
+      "zone": "Plomberie",
+      "article": "Chauffe-eau",
+      "colorKey": "orange",
+      "status": "À corriger — préventif",
+      "urgency": "1 à 3 ans",
+      "trade": "Plombier",
+      "costEstimate": "1 200 $ – 2 000 $",
+      "rawObservation": "• Appareil en fin de vie utile",
+      "page": 14,
+      "isExterior": false
+    },
+    {
+      "id": "plomberie__cuisine",
+      "zone": "Plomberie",
+      "article": "Évier de cuisine",
+      "colorKey": "vert",
+      "status": "Conforme",
+      "urgency": "—",
+      "trade": "—",
+      "costEstimate": "—",
+      "rawObservation": "• Débit normal, aucune fuite",
+      "page": 14,
+      "isExterior": false
+    },
+    {
+      "id": "plomberie__salle-de-bain",
+      "zone": "Plomberie",
+      "article": "Salle de bain",
+      "colorKey": "orange",
+      "status": "À corriger — préventif",
+      "urgency": "1 à 3 ans",
+      "trade": "Plombier",
+      "costEstimate": "150 $ – 400 $",
+      "rawObservation": "• Joint de baignoire à refaire",
+      "page": 15,
+      "isExterior": false
+    },
+    {
+      "id": "electricite__panneau",
+      "zone": "Électricité",
+      "article": "Panneau de distribution",
+      "colorKey": "violet",
+      "status": "Non conforme BNQ",
+      "urgency": "À planifier",
+      "trade": "Électricien",
+      "costEstimate": "500 $ – 1 200 $",
+      "rawObservation": "• Disjoncteur double mal identifié",
+      "page": 18,
+      "isExterior": false
+    },
+    {
+      "id": "electricite__prises",
+      "zone": "Électricité",
+      "article": "Prises intérieures",
+      "colorKey": "vert",
+      "status": "Conforme",
+      "urgency": "—",
+      "trade": "—",
+      "costEstimate": "—",
+      "rawObservation": "• Polarité correcte",
+      "page": 19,
+      "isExterior": false
+    },
+    {
+      "id": "chauffage__fournaise",
+      "zone": "Chauffage",
+      "article": "Fournaise",
+      "colorKey": "orange",
+      "status": "À corriger — préventif",
+      "urgency": "Entretien annuel",
+      "trade": "Technicien en chauffage",
+      "costEstimate": "150 $ – 300 $",
+      "rawObservation": "• Filtre encrassé\n• Entretien annuel recommandé",
+      "page": 22,
+      "isExterior": false
+    },
+    {
+      "id": "isolation__comble",
+      "zone": "Isolation",
+      "article": "Isolation du comble",
+      "colorKey": "orange",
+      "status": "À corriger — préventif",
+      "urgency": "1 à 3 ans",
+      "trade": "Isolation",
+      "costEstimate": "1 000 $ – 2 500 $",
+      "rawObservation": "• Épaisseur inférieure à la valeur recommandée",
+      "page": 24,
+      "isExterior": false
+    },
+    {
+      "id": "interieur__fenetres",
+      "zone": "Intérieur",
+      "article": "Fenêtres",
+      "colorKey": "rouge",
+      "status": "À corriger — prioritaire",
+      "urgency": "Immédiat",
+      "trade": "Vitrier",
+      "costEstimate": "400 $ – 900 $",
+      "rawObservation": "• Fenêtre de la chambre ne se verrouille pas",
+      "page": 26,
+      "isExterior": false
+    },
+    {
+      "id": "interieur__avertisseurs",
+      "zone": "Intérieur",
+      "article": "Avertisseurs de fumée",
+      "colorKey": "inconnu",
+      "status": "Information",
+      "urgency": "—",
+      "trade": "—",
+      "costEstimate": "—",
+      "rawObservation": "• Appareils présents; vérifier la date de fabrication",
+      "page": 27,
+      "isExterior": false
+    }
+  ],
+  "adminItems": [
+    {
+      "id": "documents__note",
+      "zone": "Documents",
+      "article": "À propos de cet exemple",
+      "colorKey": "inconnu",
+      "status": "Information",
+      "trade": "—",
+      "urgency": "—",
+      "costEstimate": "—",
+      "rawObservation": "• Ce site est entièrement fictif.\n• Les coûts et constats sont inventés.",
+      "page": 1
+    }
+  ],
+  "legend": {
+    "entries": [
+      {
+        "symbol": "Rouge",
+        "colorKey": "rouge",
+        "description": "Déficience à corriger sans tarder",
+        "urgency": "Immédiat",
+        "status": "À corriger — prioritaire",
+        "baseCost": "—",
+        "count": 2
+      },
+      {
+        "symbol": "Violet",
+        "colorKey": "violet",
+        "description": "Non conforme à une norme",
+        "urgency": "À planifier",
+        "status": "Non conforme BNQ",
+        "baseCost": "—",
+        "count": 1
+      },
+      {
+        "symbol": "Bleu",
+        "colorKey": "bleu",
+        "description": "Requis, non inspecté",
+        "urgency": "À vérifier",
+        "status": "Requis — non inspecté",
+        "baseCost": "—",
+        "count": 1
+      },
+      {
+        "symbol": "Orange",
+        "colorKey": "orange",
+        "description": "Entretien préventif",
+        "urgency": "1 à 3 ans",
+        "status": "À corriger — préventif",
+        "baseCost": "—",
+        "count": 7
+      },
+      {
+        "symbol": "Vert",
+        "colorKey": "vert",
+        "description": "Aucune déficience observable",
+        "urgency": "—",
+        "status": "Conforme",
+        "baseCost": "—",
+        "count": 4
+      },
+      {
+        "symbol": "Sans symbole",
+        "colorKey": "inconnu",
+        "description": "Information",
+        "urgency": "—",
+        "status": "Information",
+        "baseCost": "—",
+        "count": 1
+      }
+    ],
+    "totalArticles": 16
+  },
+  "levels": [
+    {
+      "id": "rdc",
+      "name": "Rez-de-chaussée",
+      "footprint": {
+        "width": 8,
+        "height": 10
+      },
+      "rooms": [
+        {
+          "id": "salon",
+          "name": "Salon",
+          "x": 0.4,
+          "y": 0.4,
+          "w": 4,
+          "h": 4.2,
+          "itemIds": [
+            "electricite__prises",
+            "interieur__fenetres",
+            "interieur__avertisseurs"
+          ]
+        },
+        {
+          "id": "cuisine",
+          "name": "Cuisine",
+          "x": 4.6,
+          "y": 0.4,
+          "w": 3,
+          "h": 4.2,
+          "itemIds": [
+            "plomberie__cuisine"
+          ]
+        },
+        {
+          "id": "sdb",
+          "name": "Salle de bain",
+          "x": 4.6,
+          "y": 4.8,
+          "w": 3,
+          "h": 2.6,
+          "itemIds": [
+            "plomberie__salle-de-bain"
+          ]
+        },
+        {
+          "id": "chambre",
+          "name": "Chambre",
+          "x": 0.4,
+          "y": 4.8,
+          "w": 4,
+          "h": 4.8,
+          "itemIds": []
+        }
+      ]
+    },
+    {
+      "id": "sous-sol",
+      "name": "Sous-sol",
+      "footprint": {
+        "width": 8,
+        "height": 10
+      },
+      "rooms": [
+        {
+          "id": "mecanique",
+          "name": "Salle mécanique",
+          "x": 0.4,
+          "y": 0.4,
+          "w": 3.6,
+          "h": 3.6,
+          "itemIds": [
+            "chauffage__fournaise",
+            "plomberie__chauffe-eau",
+            "electricite__panneau"
+          ]
+        },
+        {
+          "id": "fondation",
+          "name": "Aire ouverte",
+          "x": 4.2,
+          "y": 0.4,
+          "w": 3.4,
+          "h": 6,
+          "itemIds": [
+            "fondation__murs",
+            "fondation__drain"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "comble",
+      "name": "Comble",
+      "footprint": {
+        "width": 8,
+        "height": 10
+      },
+      "rooms": [
+        {
+          "id": "entretoit",
+          "name": "Entretoit",
+          "x": 0.5,
+          "y": 0.5,
+          "w": 7,
+          "h": 9,
+          "itemIds": [
+            "isolation__comble"
+          ]
+        }
+      ]
+    }
+  ],
+  "sitePlan": {
+    "imageDataUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MDAiIGhlaWdodD0iNjAwIiB2aWV3Qm94PSIwIDAgODAwIDYwMCI+CjxyZWN0IHdpZHRoPSI4MDAiIGhlaWdodD0iNjAwIiBmaWxsPSIjZmFmYWY1Ii8+CjxyZWN0IHg9IjIwIiB5PSIyMCIgd2lkdGg9Ijc2MCIgaGVpZ2h0PSI1NjAiIGZpbGw9IiNlZWY1ZTYiIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSIzIi8+CjxyZWN0IHg9IjMwIiB5PSIzMCIgd2lkdGg9IjE3MCIgaGVpZ2h0PSIyNTAiIGZpbGw9IiNkZGQiIHN0cm9rZT0iIzY2NiIvPgo8dGV4dCB4PSIxMTUiIHk9IjE1MCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM0NDQiPkVudHLDqWU8L3RleHQ+Cjx0ZXh0IHg9IjExNSIgeT0iMTcyIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzQ0NCI+KGdyYXZpZXIpPC90ZXh0Pgo8cmVjdCB4PSIyNjAiIHk9IjIwMCIgd2lkdGg9IjI1MCIgaGVpZ2h0PSIyNjAiIGZpbGw9IiNmNGUzYzgiIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSIzIi8+Cjx0ZXh0IHg9IjM4NSIgeT0iMzIwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIyNiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzMzMyI+TWFpc29uPC90ZXh0Pgo8dGV4dCB4PSIzODUiIHk9IjM0NiIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM1NTUiPmV4ZW1wbGUgZmljdGlmPC90ZXh0Pgo8cmVjdCB4PSI1MjAiIHk9IjI1MCIgd2lkdGg9IjE1MCIgaGVpZ2h0PSIxNTAiIGZpbGw9IiNlMGQyYmQiIHN0cm9rZT0iIzU1NSIvPgo8dGV4dCB4PSI1OTUiIHk9IjMzMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM0NDQiPlRlcnJhc3NlPC90ZXh0Pgo8cmVjdCB4PSI2MDAiIHk9IjUwIiB3aWR0aD0iMTUwIiBoZWlnaHQ9IjExMCIgZmlsbD0iI2NjYyIgc3Ryb2tlPSIjNTU1Ii8+Cjx0ZXh0IHg9IjY3NSIgeT0iMTEwIiBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZm9udC1zaXplPSIxOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzQ0NCI+Q2FiYW5vbjwvdGV4dD4KPHJlY3QgeD0iMjYwIiB5PSI0NzAiIHdpZHRoPSI0MTAiIGhlaWdodD0iMTQiIGZpbGw9IiM5YmMxN2MiIHN0cm9rZT0iIzVhOGEzYyIvPgo8dGV4dCB4PSI0NjUiIHk9IjUxMCIgZm9udC1mYW1pbHk9InNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM0NDQiPkhhaWU8L3RleHQ+Cjwvc3ZnPg==",
+    "width": 800,
+    "height": 600,
+    "hotspots": [
+      {
+        "id": "spot-maison",
+        "name": "Bâtiment principal",
+        "x": 260,
+        "y": 200,
+        "w": 250,
+        "h": 260,
+        "itemIds": [
+          "toiture__bardeaux",
+          "toiture__gouttieres"
+        ]
+      },
+      {
+        "id": "spot-terrasse",
+        "name": "Terrasse",
+        "x": 520,
+        "y": 250,
+        "w": 150,
+        "h": 150,
+        "itemIds": [
+          "exterieur__terrasse"
+        ]
+      },
+      {
+        "id": "spot-entree",
+        "name": "Entrée de stationnement",
+        "x": 30,
+        "y": 30,
+        "w": 170,
+        "h": 250,
+        "itemIds": [
+          "exterieur__entree"
+        ]
+      },
+      {
+        "id": "spot-cabanon",
+        "name": "Cabanon",
+        "x": 600,
+        "y": 50,
+        "w": 150,
+        "h": 110,
+        "itemIds": [
+          "exterieur__cabanon"
+        ]
+      }
+    ]
+  },
+  "userState": {
+    "userProgress": {},
+    "deletedItemIds": []
+  }
+}
