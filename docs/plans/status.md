@@ -39,15 +39,19 @@ The old public repo was deleted and recreated empty (Phase 0 done). In the local
 - The pre-commit hook blocks a commit containing a denylist pattern (tested with a temporary file).
 - Flaky "stuck on Chargement…" test failures were traced to `python3 -m http.server` (listen backlog of 5 overflows when many ES modules load at once). `tools/serve.py` raises the backlog; use it instead.
 
-## Remaining steps (in order)
+## Phase 3 — done
 
-1. **Phase 3 — fresh repository.** The local `.git` still contains the old commit and the old author identity. **Do not push it.**
-   1. Run `tools/check_no_pii.sh` (must print OK) and `npm test`.
-   2. `rm -rf .git && git init -b main`.
-   3. `git config user.name "<name>"` and `git config user.email "<id>+<user>@users.noreply.github.com"` (and enable "Block command line pushes that expose my email" on GitHub).
-   4. `tools/install_hooks.sh`, then `git add -A && git status` and read the list: no `private/`, no PDF/xlsx/zip/image, `node_modules/` absent. Commit once.
-   5. Add the remote of the new empty repo and push. Enable Pages (branch `main`, folder `/`).
-   6. Open the live URL: start screen, then "Ouvrir l'exemple". View source of `index.html` and `demo/demo-site.inspection.json` for identifiers. Confirm the commit author shows the noreply address.
+- `check_no_pii.sh` OK and `npm test` 9/9 before starting.
+- Old `.git` removed, `git init -b main`, identity set to the GitHub noreply address (repo-local config), hook installed, 22 files staged and reviewed (no `private/`, images, documents or `node_modules/`), one commit, remote re-added, pushed.
+- Pages enabled through `gh api` (branch `main`, folder `/`), live at `https://<USER>.github.io/<REPO>/`.
+- Live check (project Playwright, Chromium): page loads, "Ouvrir l’exemple" opens the fictional house, 0 console errors, 0 responses ≥ 400. Old `data/inspection.*`, `assets/terrain.png`, `js/app.js` return 404. Served files and commit contents contain no denylist pattern. The GitHub API shows the noreply address for author and committer.
+- The denylist does match the author line of `git log` (one short pattern matches the noreply identity). This is expected, not a leak.
+- Not automated: enabling "Block command line pushes that expose my email" in GitHub email settings. Do it by hand.
+- The Playwright MCP browser is not installed on this machine (needs Chrome); use the project's own `node_modules/playwright` for live checks.
+
+## Remaining steps
+
+1. Enable the GitHub email-privacy push block (manual).
 2. **Optional follow-ups:**
    - A GitHub Action that runs the generic part of `check_no_pii.sh` and `npm test` (the denylist is not available in CI, so the personal-pattern check stays local).
    - Escape the personal note in `openDetailDrawer` (`views.js`) so `</textarea>` in a note cannot break the drawer.

@@ -112,7 +112,7 @@ inspection-viewer/
 5. Enable GitHub Pages on the new repo.
 6. Check the live site: the page, `view-source`, and every file under `demo/` contain no identifiers.
 
-**Status.** `[ ]`
+**Status.** `[x]` Done. Fresh `git init`, single commit authored with the GitHub noreply address, pushed to the new empty repo, Pages enabled (branch `main`, folder `/`). Live site checked: the demo opens with no console errors or failed requests, the old data/image paths return 404, and served files and commit contents have no denylist hit. Remaining manual step: enable "Block command line pushes that expose my email" in GitHub email settings (no API for it).
 
 ---
 
@@ -178,12 +178,12 @@ A static page cannot fetch a Drive "anyone with the link" file directly, because
 ## Verification checklist (before announcing the new site)
 
 - [x] `tools/check_no_pii.sh` passes (current tree)
-- [ ] Case-insensitive search of the working tree for each denylist pattern returns nothing
-- [ ] Commit author on the new repo shows the noreply email
-- [ ] Live site opens the demo with no network errors
-- [ ] No file in the repo is a PDF, spreadsheet, zip, or non-demo image
+- [x] Case-insensitive search of the working tree for each denylist pattern returns nothing
+- [x] Commit author on the new repo shows the noreply email
+- [x] Live site opens the demo with no network errors
+- [x] No file in the repo is a PDF, spreadsheet, zip, or non-demo image
 - [x] Export, clear storage, import round trip works (Playwright, `tests/viewer.spec.js`)
-- [ ] Old repo deleted and old Pages URLs return 404
+- [x] Old repo deleted and old Pages URLs return 404
 
 ## Open questions
 
