@@ -1,15 +1,16 @@
 #!/usr/bin/env python3
-"""Assemble a site package (*.inspection.json) from the exporter output.
+"""Build a site package (*.inspection.json) in one step.
 
 Inputs are NOT part of the repository: pass them on the command line.
 
-    python3 tools/build_package.py \
-        --inspection private/inspection.json \
+    python3 tools/build_package.py REPORT.xlsx \
+        --mask-file private/denylist.txt \
         --layout private/layout.json \
         --plan-image private/plan.png \
         --name "Ma maison" \
         --out private/ma-maison.inspection.json
 
+The spreadsheet is read and scrubbed in memory; no intermediate file is written.
 --layout is optional: a JSON with {"floorPlans": {"levels": [...]}, "sitePlanHotspots": [...]}.
 """
 
@@ -19,6 +20,8 @@ import json
 import struct
 import sys
 from pathlib import Path
+
+from export_inspection_json import export_report
 
 SCHEMA = 1
 MIME = {".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".gif": "image/gif", ".webp": "image/webp"}
@@ -32,14 +35,16 @@ def png_size(data: bytes):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--inspection", required=True, type=Path, help="JSON written by export_inspection_json.py")
+    ap.add_argument("report", type=Path, help="Path to the .xlsx report")
+    ap.add_argument("--mask-file", type=Path, help="Text file, one regular expression per line, to mask")
+    ap.add_argument("--expected-items", type=int, help="Fail if the item count differs")
     ap.add_argument("--layout", type=Path)
     ap.add_argument("--plan-image", type=Path)
     ap.add_argument("--name", required=True)
     ap.add_argument("--out", required=True, type=Path)
     a = ap.parse_args()
 
-    data = json.loads(a.inspection.read_text(encoding="utf-8"))
+    data = export_report(a.report, a.name, a.mask_file, a.expected_items)
     layout = json.loads(a.layout.read_text(encoding="utf-8")) if a.layout else {}
 
     site_plan = {"imageDataUrl": None, "width": 800, "height": 600,

@@ -34,11 +34,11 @@ Voir `js/package.js` (validation) et `demo/demo-site.inspection.json` (exemple).
 Les rapports réels ne doivent **jamais** être ajoutés au dépôt : gardez-les dans `private/` (ignoré par git).
 
 ```bash
-python3 tools/export_inspection_json.py rapport.xlsx --out private/inspection.json \
-    --site-name "Ma maison" --mask-file private/denylist.txt
-python3 tools/build_package.py --inspection private/inspection.json \
+python3 tools/build_package.py rapport.xlsx --mask-file private/denylist.txt \
     --plan-image private/plan.png --name "Ma maison" --out private/ma-maison.inspection.json
 ```
+
+Une seule commande, aucun fichier intermédiaire : le rapport est lu et masqué en mémoire. Options : `--layout` (pièces et points du plan), `--expected-items`.
 
 `private/denylist.txt` contient une expression régulière par ligne (adresse, numéro de lot, nom, courriel…). Elle sert à masquer ces valeurs dans l'export et à bloquer les commits qui les contiendraient.
 

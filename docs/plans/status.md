@@ -20,7 +20,7 @@ The old public repo was deleted and recreated empty (Phase 0 done). In the local
 | `js/canvas.js`, `js/views.js` | Plan image and size come from `appState.sitePlan`, not a fixed 792×988 file. Removed the `'spot-maison'` default and the hard-coded building size. "APCHQ" wording removed from the legend headings. The user's pre-existing uncommitted undo/redo button edits in `views.js` were kept as they were. |
 | `index.html` | Generic title, no data script, `type="module"`, nav, progress box and backup button hidden until a site is loaded. |
 | `js/main.js` (new) | Start screen (open demo / open file), error display, header, keyboard shortcuts, export/import dialog with options, "clear progress" and "remove site from this browser". |
-| Tools (now inside the repo at `tools/`) | `export_inspection_json.py` (path argument, `--mask-file`, masks `DV…`/`PA…` references, no JS output), `build_package.py` (builds a package from export + layout + image), `make_demo.py` (fictional house, 16 items, 3 levels, SVG plan), `check_no_pii.sh`. |
+| Tools (now inside the repo at `tools/`) | `export_inspection_json.py` (path argument, `--mask-file`, masks `DV…`/`PA…` references, no JS output), `build_package.py` (one step: spreadsheet + optional layout + image → package, no intermediate files), `make_demo.py` (fictional house, 16 items, 3 levels, SVG plan), `check_no_pii.sh`. |
 | Demo | `demo/demo-site.inspection.json` generated. Fully fictional. |
 | Repo hygiene | `.gitignore` (ignores `private/`, spreadsheets, PDFs, zips, any `*.inspection.json` except the demo). README rewritten with no identifying text. `tools/check_no_pii.sh` passed once before Playwright files were added. |
 
@@ -48,6 +48,8 @@ The old public repo was deleted and recreated empty (Phase 0 done). In the local
 - The denylist does match the author line of `git log` (one short pattern matches the noreply identity). This is expected, not a leak.
 - Not automated: enabling "Block command line pushes that expose my email" in GitHub email settings. Do it by hand.
 - The Playwright MCP browser is not installed on this machine (needs Chrome); use the project's own `node_modules/playwright` for live checks.
+
+- `private/` now holds only: `denylist.txt`, `layout.json`, `plan.png`, `real.inspection.json` (the package to test with) and the original plan draft. The intermediate exports and a scratch script were deleted.
 
 ## Remaining steps
 

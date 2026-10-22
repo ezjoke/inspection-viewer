@@ -4,12 +4,15 @@
     python3 tools/export_inspection_json.py REPORT.xlsx --out private/inspection.json \
         [--site-name "My house"] [--mask-file private/denylist.txt]
 
-Then assemble a shareable package with tools/build_package.py.
+Debug helper only: tools/build_package.py does the same in memory and writes the
+final package directly, which is the normal way to prepare a site.
 
 Free-text fields are scrubbed: document reference numbers (seller declaration,
 purchase offer) and every regular expression listed in --mask-file are replaced
 by "[masqué]". Review the output before sharing it.
 """
+
+from __future__ import annotations
 
 import argparse
 import json
@@ -230,22 +233,16 @@ def extract_legend(ws) -> dict:
     }
 
 
-def main():
-    ap = argparse.ArgumentParser(description="Export an inspection spreadsheet to JSON.")
-    ap.add_argument("excel", type=Path, help="Path to the .xlsx report (kept outside the repository)")
-    ap.add_argument("--out", type=Path, required=True, help="Output JSON path (e.g. private/inspection.json)")
-    ap.add_argument("--site-name", default="Site sans nom")
-    ap.add_argument("--mask-file", type=Path, help="Text file, one regular expression per line, to mask")
-    ap.add_argument("--expected-items", type=int, help="Fail if the item count differs")
-    args = ap.parse_args()
+def export_report(excel: Path, site_name: str = "Site sans nom", mask_file: Path | None = None,
+                  expected_items: int | None = None) -> dict:
+    """Read the spreadsheet and return the scrubbed payload (nothing is written to disk)."""
+    if not excel.exists():
+        sys.exit(f"Error: {excel} not found.")
+    if mask_file:
+        load_mask_file(mask_file)
 
-    if not args.excel.exists():
-        sys.exit(f"Error: {args.excel} not found.")
-    if args.mask_file:
-        load_mask_file(args.mask_file)
-
-    print(f"Loading {args.excel.name}...")
-    wb = openpyxl.load_workbook(args.excel, data_only=True)
+    print(f"Loading {excel.name}...")
+    wb = openpyxl.load_workbook(excel, data_only=True)
 
     items = extract_observations(wb["Observations"])
     admin_items = extract_admin_items(wb["Informations générales"])
@@ -260,8 +257,8 @@ def main():
     print("\n--- Summary Verification ---")
     print(f"Total observation items extracted: {len(items)}")
     print(f"Expected in legend: {legend['totalArticles']}")
-    if args.expected_items is not None and len(items) != args.expected_items:
-        sys.exit(f"Expected {args.expected_items} items, got {len(items)}")
+    if expected_items is not None and len(items) != expected_items:
+        sys.exit(f"Expected {expected_items} items, got {len(items)}")
 
     print("\nCounts per Color Key:")
     for key in SEVERITY_ORDER:
@@ -271,12 +268,24 @@ def main():
         if leg_cnt is not None and cnt != leg_cnt:
             sys.exit(f"Mismatch for {key}: got {cnt} vs legend {leg_cnt}")
 
-    payload = {
-        "meta": {"title": args.site_name, "totalItems": len(items), "severityOrder": SEVERITY_ORDER},
+    return {
+        "meta": {"title": site_name, "totalItems": len(items), "severityOrder": SEVERITY_ORDER},
         "legend": legend,
         "items": items,
         "adminItems": admin_items,
     }
+
+
+def main():
+    ap = argparse.ArgumentParser(description="Export an inspection spreadsheet to JSON.")
+    ap.add_argument("excel", type=Path, help="Path to the .xlsx report (kept outside the repository)")
+    ap.add_argument("--out", type=Path, required=True, help="Output JSON path (e.g. private/inspection.json)")
+    ap.add_argument("--site-name", default="Site sans nom")
+    ap.add_argument("--mask-file", type=Path, help="Text file, one regular expression per line, to mask")
+    ap.add_argument("--expected-items", type=int, help="Fail if the item count differs")
+    args = ap.parse_args()
+
+    payload = export_report(args.excel, args.site_name, args.mask_file, args.expected_items)
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"\nWritten {args.out} ({args.out.stat().st_size} bytes)")
