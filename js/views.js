@@ -981,9 +981,24 @@ export class ViewsManager {
           <input type="text" class="form-control" id="room-rename-input" value="${room.name}">
         </div>
 
-        <div class="room-dims-info">
-          <span>Dimensions : <strong>${room.w.toFixed(2)} m × ${room.h.toFixed(2)} m</strong></span>
-          <span>Surface : <strong>${(room.w * room.h).toFixed(1)} m²</strong></span>
+        <div class="room-dims-edit">
+          <label class="form-label">Dimensions :</label>
+          <div class="room-dims-inputs">
+            <div class="room-dim-field">
+              <span class="room-dim-axis">L</span>
+              <input type="number" class="form-control form-control-sm" id="room-width-input"
+                min="0.1" max="999" step="0.01" value="${room.w.toFixed(2)}">
+              <span class="room-dim-unit">m</span>
+            </div>
+            <span class="room-dim-sep">×</span>
+            <div class="room-dim-field">
+              <span class="room-dim-axis">P</span>
+              <input type="number" class="form-control form-control-sm" id="room-height-input"
+                min="0.1" max="999" step="0.01" value="${room.h.toFixed(2)}">
+              <span class="room-dim-unit">m</span>
+            </div>
+            <span class="room-dim-area" id="room-area-display">${(room.w * room.h).toFixed(1)} m²</span>
+          </div>
         </div>
 
         <div class="assigned-items-header">
@@ -1036,6 +1051,32 @@ export class ViewsManager {
       appState.saveToStorage();
       this.renderFloorPlanView(targetEl);
     });
+
+    const applyDimChange = () => {
+      const wInput = panel.querySelector('#room-width-input');
+      const hInput = panel.querySelector('#room-height-input');
+      const minSize = 0.1;
+      const newW = Math.max(minSize, parseFloat(wInput.value) || minSize);
+      const newH = Math.max(minSize, parseFloat(hInput.value) || minSize);
+      wInput.value = newW.toFixed(2);
+      hInput.value = newH.toFixed(2);
+      const areaEl = panel.querySelector('#room-area-display');
+      if (areaEl) areaEl.textContent = `${(newW * newH).toFixed(1)} m²`;
+      appState.pushHistorySnapshot('Redimensionner pièce');
+      room.w = newW;
+      room.h = newH;
+      appState.saveToStorage();
+      // Update the canvas shape in-place without a full re-render
+      const shape = this.canvasInstance.shapes.find(s => s.id === room.id);
+      if (shape) {
+        shape.w = newW;
+        shape.h = newH;
+        this.canvasInstance.notifyShapeUpdated(shape);
+      }
+    };
+
+    panel.querySelector('#room-width-input')?.addEventListener('change', applyDimChange);
+    panel.querySelector('#room-height-input')?.addEventListener('change', applyDimChange);
 
     panel.querySelector('#btn-assign-items-room')?.addEventListener('click', () => {
       this.openItemAssignModal({

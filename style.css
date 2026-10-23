@@ -1176,15 +1176,54 @@ body {
   font-weight: 700;
 }
 
-.room-dims-info {
+.room-dims-edit {
+  margin-bottom: 10px;
+}
+
+.room-dims-inputs {
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.room-dim-field {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.room-dim-axis {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  min-width: 12px;
+}
+
+.room-dim-unit {
   font-size: 11px;
   color: var(--text-muted);
-  background-color: var(--bg);
-  padding: 6px 10px;
+}
+
+.room-dim-sep {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.room-dim-area {
+  font-size: 11px;
+  color: var(--text-muted);
+  background: var(--bg);
   border-radius: var(--radius-sm);
-  margin-bottom: 10px;
+  padding: 2px 7px;
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+.form-control-sm {
+  width: 72px;
+  padding: 3px 6px;
+  font-size: 12px;
 }
 
 .assigned-items-header {
